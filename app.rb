@@ -50,7 +50,7 @@ post '/login' do
 end
 
 post '/messages' do
-  message = Message.create(title:params[:title], body:params[:body])
+  message = Message.create(user_id:current_user.id, body:params[:body])
   redirect "/"
 end
 
