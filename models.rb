@@ -5,5 +5,10 @@
 # here must inherit from ActiveRecord::Base
 
 # e.g.
+class User < ActiveRecord::Base
+  has_many :messages, dependent: :destroy
+end
+
 class Message < ActiveRecord::Base
+  belongs_to :user
 end
