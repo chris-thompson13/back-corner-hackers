@@ -1,34 +1,43 @@
-<div class="spacer">
-
-</div>
+<div class="spacer"></div>
 
 <div class="full">
 
-<div class="inLine">
-
-  <h1>Messages</h1>
+  <div class="inLine">
 
 
-<% @messages.reverse_each do |message| %>
-<div class="messageTitle">
+    <h1>Messages</h1>
 
-  <p>
-    <a href="/messages/<%= message.id %>"><%= message.title %></a>
-  </p>
-  <p><%= message.body %></p>
-</div>
+    <div>
+      <form class="login-form" action="/login" method="post">
+            <label for="username">Username</label>
+            <input type="text" name="username">
+            <label for="password">Password</label>
+            <input type="password" name="password">
+            <input type="submit" value="submit">
+          </form>
+    </div>
 
-  <% end %>
+    <% @messages.reverse_each do |message| %>
+      <div class="messageTitle">
 
-</div>
-<div class="inLine2">
-  <form class="messenger" action="/messages" method="post">
-    <label>Who are you?</label><br>
-    <input type="text" name="title" value=""><br>
-    <label>message</label><br>
-    <textarea name="body" rows = "8" value=""></textarea><br>
-    <input type="submit" name="" value="send" id = "sub"><br>
-  </form>
+        <p>
+          <a href="/messages/<%= message.id %>"><%= message.title %></a>
+        </p>
+        <p><%= message.body %></p>
+      </div>
 
-</div>
+    <% end %>
+
+  </div>
+
+  <div class="inLine2">
+    <form class="messenger" action="/messages" method="post">
+      <label>Who are you?</label><br>
+      <input type="text" name="title" value=""><br>
+      <label>message</label><br>
+      <textarea name="body" rows="8" value=""></textarea><br>
+      <input type="submit" name="" value="send" id="sub"><br>
+    </form>
+
+  </div>
 </div>
