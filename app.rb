@@ -25,6 +25,11 @@ get '/login' do
   erb :login
 end
 
+get '/logout' do
+  session.clear
+  redirect "/"
+end
+
 # Define routes below
 get '/' do
   session[:login]=false
@@ -52,8 +57,11 @@ post '/login' do
 end
 
 post '/messages' do
-  message = Message.create(user_id:current_user.id, body:params[:body])
-  redirect "/"
+  if !current_user
+    redirect "/login"
+  end
+    message = Message.create(user_id:current_user.id, body:params[:body])
+    redirect "/"
 end
 
 get '/messages/new' do
