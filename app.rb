@@ -3,8 +3,21 @@ require 'sinatra/reloader'
 require 'sinatra/activerecord'
 require './models'
 
+enable :sessions
+
 # Database configuration
 set :database, "sqlite3:development.sqlite3"
+
+# helper methods
+# define current user
+# def current_user
+#   @user ||= User.find_by_id(session[:user_id])
+# end
+#
+# # authenticate current user
+# def authenticate_user
+#   redirect '/' if current_user.nil?
+# end
 
 # Define routes below
 get '/' do

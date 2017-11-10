@@ -1,15 +1,11 @@
-# Put data creation code here
-# Initiate the data by running 'rake db:seed'
-# in the command line after running migrations (rake db:migrate)
-
-# e.g.
 # User.create(f_name: 'Bobby', l_name: 'McBobberson')
 require 'faker'
 
+user = User.create(username: 'admin', password: '12345', fname: 'Jane', lname: 'McBobberson')
+
 20.times do
   Message.create(
-    title: Faker::RickAndMorty.character,
-    body: Faker::RickAndMorty.quote
-
-  )
+    body: Faker::RickAndMorty.quote,
+    user_id: user.id
+    )
 end
