@@ -1,0 +1,34 @@
+<div class="spacer">
+
+</div>
+
+<div class="full">
+
+<div class="inLine">
+
+  <h1>Messages</h1>
+
+
+<% @messages.reverse_each do |message| %>
+<div class="messageTitle">
+
+  <p>
+    <a href="/messages/<%= message.id %>"><%= message.title %></a>
+  </p>
+  <p><%= message.body %></p>
+</div>
+
+  <% end %>
+
+</div>
+<div class="inLine2">
+  <form class="messenger" action="/messages" method="post">
+    <label>Who are you?</label><br>
+    <input type="text" name="title" value=""><br>
+    <label>message</label><br>
+    <textarea name="body" rows = "8" value=""></textarea><br>
+    <input type="submit" name="" value="send" id = "sub"><br>
+  </form>
+
+</div>
+</div>
