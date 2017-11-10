@@ -1,4 +1,4 @@
 .ds_store
 # Logs and databases #
 ######################
-*.sqlite3
+development.sqlite3
