@@ -3,33 +3,19 @@
 <div class="full">
 
   <div class="inLine">
-
-
     <h1>Messages</h1>
-
-    <div>
-      <form class="login-form" action="/login" method="post">
-            <label for="username">Username</label>
-            <input type="text" name="username">
-            <label for="password">Password</label>
-            <input type="password" name="password">
-            <input type="submit" value="submit">
-          </form>
-    </div>
-
     <% @messages.reverse_each do |message| %>
       <div class="messageTitle">
-
         <p>
           <a href="/messages/<%= message.id %>"><%= @users.find_by_id(message.user_id).username %></a>
         </p>
         <p><%= message.body %></p>
       </div>
-
     <% end %>
-
   </div>
-
+  <br>
+  <br>
+  <br>
   <div class="inLine2">
     <form class="messenger" action="/messages" method="post">
       <label>Who are you?</label><br>
@@ -38,6 +24,5 @@
       <textarea name="body" rows="8" value=""></textarea><br>
       <input type="submit" name="" value="send" id="sub"><br>
     </form>
-
   </div>
 </div>

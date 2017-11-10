@@ -10,8 +10,13 @@ nav{
   margin-top: 0px;
   padding: 20px;
   top:0px;
-
 }
+
+.login-form {
+  width: 500px;
+  display: inline-block;
+}
+
 h1{
   text-align: center;
 }
@@ -57,23 +62,27 @@ p{
   width:50%;
   display: inline-block;
   float: left;
+  margin-top: 40px;
 }
 .full{
   width: 100%;
 }
 .inLine2{
-  width:50%;
-  display: inline-block;
-  position: fixed;
+  width:40%;
+  display: inline;
+  /*margin-right: 10px;*/
+  /*position: fixed;*/
   float: right;
   background-color: rgba(255, 0, 0, 0.0);
 }
 
 form{
-  margin: 0 auto;
-  float: right;
+  margin: 0 50;
+  /*float: right;*/
   width: 90%;
 }
+
+
 input{
   border-color:#33b8ff;
   width: 90%;

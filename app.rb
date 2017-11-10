@@ -11,17 +11,22 @@ set :database, "sqlite3:development.sqlite3"
 
 # helper methods
 # define current user
-# def current_user
-#   @user ||= User.find_by_id(session[:user_id])
-# end
-#
-# # authenticate current user
-# def authenticate_user
-#   redirect '/' if current_user.nil?
-# end
+def current_user
+  @user ||= User.find_by_id(session[:user_id])
+end
+
+# authenticate current user
+def authenticate_user
+  redirect '/login' if current_user.nil?
+end
+
+get '/login' do
+  erb :login
+end
 
 # Define routes below
 get '/' do
+  current_user
   @messages = Message.all
   @users = User.all
   erb :index
@@ -29,11 +34,19 @@ end
 
 # login
 post '/login' do
-  username = params[:username].downcase
-  user = User.find_or_create_by(username: username)
-  session[:user_id] = user.id
-  binding.pry
-  redirect '/'
+  if User.find_by(username: params[:username].downcase) == nil
+    user = User.create(username: params[:username], password: params[:password])
+    session[:user_id]=user.id
+    redirect "/"
+  else
+    user = User.find_by(username: params[:username].downcase)
+    if user.password = params[:password]
+        session[:user_id]=user.id
+        redirect '/'
+    else
+      erb :login
+    end
+  end
 end
 
 post '/messages' do
