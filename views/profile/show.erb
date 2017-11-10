@@ -1,0 +1,19 @@
+<% user = User.find_by_id(params[:id]) %>
+<h1>profile for <%= user.username %></h1>
+<h3>Current user: <%= current_user.nil? ? "" : current_user.username %></h3>
+
+<%
+ if current_user != nil && user.id == current_user.id
+   %>
+<p style="color:grey">edit</p>
+<p style="color:grey">delete</p>
+<% end %>
+
+<div class="inLine">
+  <h3><%= user.username %></h3>
+  <% user.messages.reverse_each do |message| %>
+    <div class="messageTitle">
+      <p><%= message.body %></p>
+    </div>
+  <% end %>
+</div>

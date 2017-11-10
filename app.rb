@@ -73,6 +73,10 @@ get '/messages/:id' do
   erb :'messages/show'
 end
 
+get '/profile/show/:id' do
+    erb :'profile/show'
+end
+
 # Providing model information to the view
 # requires an instance variable (prefixing with the '@' symbol)
 

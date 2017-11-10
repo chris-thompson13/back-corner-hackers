@@ -95,3 +95,13 @@ textarea{
   border-style: solid;
   text-align: center;
 }
+
+.footer {
+  display: block;
+  position: fixed;
+  width: 100vw;
+  height: 40px;
+  bottom: 0;
+  margin: 0 auto;
+  text-align: center;
+}

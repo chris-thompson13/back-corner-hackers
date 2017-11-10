@@ -7,7 +7,7 @@
     <% @messages.reverse_each do |message| %>
       <div class="messageTitle">
         <p>
-          <a href="/messages/<%= message.id %>"><%= @users.find_by_id(message.user_id).username %></a>
+          <a href="/profile/show/<%= message.user_id %>"><%= @users.find_by_id(message.user_id).username %></a>
         </p>
         <p><%= message.body %></p>
       </div>
