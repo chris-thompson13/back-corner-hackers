@@ -21,11 +21,13 @@ def authenticate_user
 end
 
 get '/login' do
+  session[:login]=true
   erb :login
 end
 
 # Define routes below
 get '/' do
+  session[:login]=false
   current_user
   @messages = Message.all
   @users = User.all

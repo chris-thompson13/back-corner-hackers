@@ -2,15 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Twitter Two</title>
     <link rel="stylesheet" href="/stylesheets/index.css">
   </head>
   <body>
     <nav>
-      <a href="/">home</a>
-      <a href="/messages/new">new</a>
+      <!-- <a href="/login">login</a> -->
+      <% if !session[:login] %>
+      <a href="<%= current_user == nil ? '/login' : '/logout' %>">
+        <%= current_user == nil ? 'Login' : 'Logout' %>
+      </a>
       <p style="color: grey"> Current user: <%= current_user != nil ? @user.username : "" %></p>
-
+      <% end %>
     </nav>
 
     <%= yield %>
