@@ -70,15 +70,13 @@ p{
 .inLine2{
   width:40%;
   display: inline;
-  /*margin-right: 10px;*/
-  /*position: fixed;*/
+  position: fixed;
   float: right;
   background-color: rgba(255, 0, 0, 0.0);
 }
 
 form{
-  margin: 0 50;
-  /*float: right;*/
+  float: right;
   width: 90%;
 }
 
