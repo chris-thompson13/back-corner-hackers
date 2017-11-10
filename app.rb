@@ -22,6 +22,7 @@ set :database, "sqlite3:development.sqlite3"
 # Define routes below
 get '/' do
   @messages = Message.all
+  @users = User.all
   erb :index
 end
 

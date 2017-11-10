@@ -21,7 +21,7 @@
       <div class="messageTitle">
 
         <p>
-          <a href="/messages/<%= message.id %>"><%= message.user_id %></a>
+          <a href="/messages/<%= message.id %>"><%= @users.find_by_id(message.user_id).username %></a>
         </p>
         <p><%= message.body %></p>
       </div>
