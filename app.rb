@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sinatra/activerecord'
 require './models'
+require 'pry'
 
 enable :sessions
 
@@ -24,6 +25,15 @@ get '/' do
   @messages = Message.all
   @users = User.all
   erb :index
+end
+
+# login
+post '/login' do
+  username = params[:username].downcase
+  user = User.find_or_create_by(username: username)
+  session[:user_id] = user.id
+  binding.pry
+  redirect '/'
 end
 
 post '/messages' do
