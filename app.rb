@@ -60,7 +60,7 @@ get '/' do
     session[:reached_last] = false
   end
 
-  @next_group_messages = next_group_messages(5,@messages)
+  @next_group_messages = next_group_messages(20,@messages)
 
   @users = User.all
   erb :index
