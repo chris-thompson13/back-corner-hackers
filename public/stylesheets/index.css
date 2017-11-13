@@ -3,7 +3,7 @@
 }
 body{
   background-image:    url("https://static.pexels.com/photos/262669/pexels-photo-262669.jpeg");
-  background-size: contain;;                      /* <------ */
+  background-size: auto;                      /* <------ */
 background-repeat:  repeat;
 background-position: top center;
 }
@@ -120,7 +120,7 @@ textarea{
   border-style: solid;
   text-align: center;
   color:#33b8ff;
-  size:13px;
+  font-size:13px;
 }
 
 .footer {
