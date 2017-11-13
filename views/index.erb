@@ -15,13 +15,13 @@
 
 
     <% if !session[:from_num].nil? && session[:from_num] - session[:num_items_on_current_page] > 0 %>
-    <form class="" action="/prev" method="post">
+    <form class="left next_prev" action="/prev" method="post">
       <input type="submit" name="" value="<< Prev">
     </form>
     <% end %>
 
     <% if !session[:reached_last] %>
-    <form class="" action="/next" method="post">
+    <form class="left next_prev" action="/next" method="post">
       <input type="submit" name="" value="Next >>">
 
     </form>
