@@ -66,7 +66,7 @@ a {
 }
 .spacer{
   width:100%;
-  height: 70px;
+  height: 100px;
 }
 .messageTitle{
   border-color:#33b8ff;
@@ -111,6 +111,9 @@ input{
   width: 90%;
   border-radius: 5px;
   border-style: solid;
+  text-align: center;
+}
+.login-form{
   text-align: center;
 }
 textarea{
