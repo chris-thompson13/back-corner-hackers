@@ -74,7 +74,18 @@ get '/messages/:id' do
 end
 
 get '/profile/show/:id' do
-    erb :'profile/show'
+  erb :'profile/show'
+end
+
+patch '/profile/edit/:id' do
+    session[:edit_mode]=false
+    current_user.update(fname: params[:first_name],lname: params[:last_name])
+    redirect "/profile/show/#{params[:id]}"
+end
+
+post '/profile/edit/:id' do
+    session[:edit_mode]=true
+    redirect "/profile/show/#{params[:id]}"
 end
 
 delete '/profile/delete' do

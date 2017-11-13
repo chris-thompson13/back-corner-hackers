@@ -1,11 +1,36 @@
 <% user = User.find_by_id(params[:id]) %>
-<h1>profile for <%= user.username %></h1>
+<% if user.nil?
+  redirect "/"
+end %>
+
 <h3>Current user: <%= current_user.nil? ? "" : current_user.username %></h3>
+
+<% if session[:edit_mode] %>
+<h1>profile for <%= user.nil? ? current_user.username : user.username %></h1>
+<form class="" action="/profile/edit/<%=params[:id]%>" method="post">
+  <label for="first_name" style="color: grey">First name</label>
+  <input type="text" name="first_name" value="<%=current_user.fname%>" style="color: grey">
+  <label for="last_name" style="color: grey">Last name</label>
+  <input type="text" name="last_name" value="<%=current_user.lname%>" style="color: grey">
+
+  <input type="hidden" name="_method" value="patch">
+  <input type="submit" name="" value="Save">
+</form>
+<% else %>
+<h1>profile for <%= user.username %></h1>
+<p>First name: <%= user.fname %></p>
+<p>Last name: <%= user.lname %></p>
+<% end %>
 
 <%
  if current_user != nil && user.id == current_user.id
    %>
-<a href="/profile/edit" style="color:grey">edit</a>
+<% if !session[:edit_mode] %>
+<form class="" action="/profile/edit/<%=params[:id]%>" method="post">
+  <input type="submit" name="" value="Edit">
+</form>
+<% end %>
+
 <form class="" action="/profile/delete" method="post">
   <input type="hidden" name="_method" value="delete">
   <input type="submit" name="" value="Delete">
