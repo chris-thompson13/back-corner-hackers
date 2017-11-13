@@ -32,12 +32,19 @@ a {
   font-size: 20px;
 
 }
+.left {
+  float: left
+}
 #sub{
   width: 90%;
   background-color: #33b8ff;
   color: white;
   font-size: 15px;
   font-weight: bold;
+}
+.right{
+  display: inline-block;
+  float: right;
 }
 .spacer{
   width:100%;
