@@ -4,7 +4,7 @@
 
   <div class="inLine">
     <h1>Messages</h1>
-    <% get_10_messages.each do |message| %>
+    <% @next_group_messages.each do |message| %>
       <div class="messageTitle">
         <p>
           <a href="/profile/show/<%= message.user_id %>"><%= @users.find_by_id(message.user_id).username %></a>
@@ -13,9 +13,17 @@
       </div>
     <% end %>
 
+
+    <% if session[:from_num] > 0 %>
+    <form class="" action="/prev" method="post">
+      <input type="submit" name="" value="<< Prev">
+    </form>
+    <% end %>
+
     <% if !session[:reached_last] %>
-    <form class="" action="/" method="post">
-      <input type="submit" name="" value="Next">
+    <form class="" action="/next" method="post">
+      <input type="submit" name="" value="Next >>">
+
     </form>
     <% end %>
   </div>

@@ -20,30 +20,23 @@ def authenticate_user
   redirect '/login' if current_user.nil?
 end
 
-def get_10_messages
-  puts "Messages: "
-  puts session[:messages]
-  puts "From Num: "
-  puts session[:from_num]
-  puts "Last: "
-  puts session[:reached_last]
+def next_group_messages(num, messages)
+  msgs = []
 
-  msges = []
-  if session[:messages].nil?
-    session[:messages] = Message.all.reverse
-    session[:from_num] = 0
-    session[:reached_last] =false
-  end
-  for i in 0..9
-    if session[:messages][session[:from_num]].nil?
+  for i in 0...num
+    msg = messages[session[:from_num]]
+    if(msg.nil?)
       session[:reached_last] = true
       break
     end
 
-    msges << session[:messages][session[:from_num]]
+
+    msgs << msg
+
     session[:from_num] += 1
   end
-  msges
+
+  msgs
 end
 
 get '/login' do
@@ -61,11 +54,21 @@ end
 get '/' do
   session[:login]=false
   current_user
+
+  @messages = Message.all.reverse
+
+  if session[:from_num].nil?
+    session[:from_num] = 0
+    session[:reached_last] = false
+  end
+
+  @next_group_messages = next_group_messages(5,@messages)
+
   @users = User.all
   erb :index
 end
 
-post '/' do
+post '/next' do
   redirect '/'
 end
 
@@ -74,11 +77,13 @@ post '/login' do
   if User.find_by(username: params[:username].downcase) == nil
     user = User.create(username: params[:username], password: params[:password])
     session[:user_id]=user.id
+    session[:from_num] = nil
     redirect "/"
   else
     user = User.find_by(username: params[:username].downcase)
     if user.password = params[:password]
         session[:user_id]=user.id
+        session[:from_num] = nil
         redirect '/'
     else
       erb :login
@@ -91,6 +96,7 @@ post '/messages' do
     redirect "/login"
   end
     message = Message.create(user_id:current_user.id, body:params[:body])
+    session[:from_num] = nil
     redirect "/"
 end
 
