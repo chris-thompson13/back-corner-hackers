@@ -20,19 +20,11 @@ def authenticate_user
   redirect '/login' if current_user.nil?
 end
 
-def next_group_messages(num)
+def next_group_messages(num, messages)
   msgs = []
 
-  binding.pry
-
-  if session[:messages].nil?
-    session[:messages] = Message.all.reverse
-    session[:from_num] = 0
-    session[:reached_last] = false
-  end
-
   for i in 0...num
-    msg = session[:messages][session[:from_num]]
+    msg = messages[session[:from_num]]
     if(msg.nil?)
       session[:reached_last] = true
       break
@@ -60,7 +52,16 @@ end
 get '/' do
   session[:login]=false
   current_user
-  @messages = Message.all
+
+  @messages = Message.all.reverse
+
+  if session[:from_num].nil?
+    session[:from_num] = 0
+    session[:reached_last] = false
+  end
+
+  @next_group_messages = next_group_messages(5,@messages)
+
   @users = User.all
   erb :index
 end

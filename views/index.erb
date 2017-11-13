@@ -4,7 +4,7 @@
 
   <div class="inLine">
     <h1>Messages</h1>
-    <% next_group_messages(10).each do |message| %>
+    <% @next_group_messages.each do |message| %>
       <div class="messageTitle">
         <p>
           <a href="/profile/show/<%= message.user_id %>"><%= @users.find_by_id(message.user_id).username %></a>
