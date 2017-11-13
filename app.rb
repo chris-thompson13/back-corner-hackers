@@ -45,7 +45,6 @@ get '/login' do
 end
 
 get '/logout' do
-  binding.pry
   session.clear
   redirect "/"
 end
@@ -137,7 +136,6 @@ end
 delete '/profile/delete' do
   current_user
   @user.destroy
-  binding.pry
   session.clear
   redirect "/"
 end
