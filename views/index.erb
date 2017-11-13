@@ -12,6 +12,13 @@
         <p><%= message.body %></p>
       </div>
     <% end %>
+
+    <% if session[:from_num] > 0 %>
+    <form class="" action="/prev" method="post">
+      <input type="submit" name="" value="Prev >>">
+    </form>
+    <% end %>
+
     <% if !session[:reached_last] %>
     <form class="" action="/next" method="post">
       <input type="submit" name="" value="Next >>">

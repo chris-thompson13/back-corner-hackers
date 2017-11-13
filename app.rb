@@ -75,11 +75,13 @@ post '/login' do
   if User.find_by(username: params[:username].downcase) == nil
     user = User.create(username: params[:username], password: params[:password])
     session[:user_id]=user.id
+    session[:from_num] = nil
     redirect "/"
   else
     user = User.find_by(username: params[:username].downcase)
     if user.password = params[:password]
         session[:user_id]=user.id
+        session[:from_num] = nil
         redirect '/'
     else
       erb :login
@@ -92,6 +94,7 @@ post '/messages' do
     redirect "/login"
   end
     message = Message.create(user_id:current_user.id, body:params[:body])
+    session[:from_num] = nil
     redirect "/"
 end
 
