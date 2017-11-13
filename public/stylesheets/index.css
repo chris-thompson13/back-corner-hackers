@@ -33,7 +33,10 @@ a {
 
 }
 .left {
+  margin-left: 10px;
+
   float: left
+
 }
 #sub{
   width: 90%;

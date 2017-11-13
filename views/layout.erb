@@ -9,18 +9,17 @@
     <nav>
       <!-- <a href="/login">login</a> -->
       <% if !session[:login] %>
+      <a class = "left" href="/">home</a>
+
       <a class = "left" href="<%= current_user == nil ? '/login' : '/logout' %>">
         <%= current_user == nil ? 'Login' : 'Logout' %>
       </a>
-      <p style="color: grey"> Current user: <%= current_user != nil ? @user.username : "" %></p>
+      <p class = "left"style="color: grey"> Current user: <%= current_user != nil ? @user.username : "" %></p>
       <% end %>
     </nav>
 
     <%= yield %>
 
-    <footer class="footer">
-      <a href="/">home</a>
-    </footer>
     <script src="/js/index.js"></script>
   </body>
 </html>
