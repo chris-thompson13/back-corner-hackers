@@ -30,6 +30,7 @@ def next_group_messages(num, messages)
       break
     end
 
+
     msgs << msg
 
     session[:from_num] += 1
@@ -44,6 +45,7 @@ get '/login' do
 end
 
 get '/logout' do
+  binding.pry
   session.clear
   redirect "/"
 end
@@ -60,8 +62,9 @@ get '/' do
     session[:reached_last] = false
   end
 
-  @next_group_messages = next_group_messages(20,@messages)
 
+  @next_group_messages = next_group_messages(10,@messages)
+  session[:num_items_on_current_page] = @next_group_messages.length
   @users = User.all
   erb :index
 end
@@ -70,16 +73,28 @@ post '/next' do
   redirect '/'
 end
 
+post '/prev' do
+  session[:from_num] -= session[:num_items_on_current_page]
+  session[:from_num] -= 10
+  if session[:from_num] < 0
+    session[:from_num] =0
+  end
+  session[:reached_last] = false
+  redirect '/'
+end
+
 # login
 post '/login' do
   if User.find_by(username: params[:username].downcase) == nil
     user = User.create(username: params[:username], password: params[:password])
     session[:user_id]=user.id
+    session[:from_num] = nil
     redirect "/"
   else
     user = User.find_by(username: params[:username].downcase)
     if user.password = params[:password]
         session[:user_id]=user.id
+        session[:from_num] = nil
         redirect '/'
     else
       erb :login
@@ -92,6 +107,7 @@ post '/messages' do
     redirect "/login"
   end
     message = Message.create(user_id:current_user.id, body:params[:body])
+    session[:from_num] = nil
     redirect "/"
 end
 
@@ -122,6 +138,7 @@ end
 delete '/profile/delete' do
   current_user
   @user.destroy
+  binding.pry
   session.clear
   redirect "/"
 end
