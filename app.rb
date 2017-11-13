@@ -77,6 +77,13 @@ get '/profile/show/:id' do
     erb :'profile/show'
 end
 
+delete '/profile/delete' do
+  current_user
+  @user.destroy
+  session.clear
+  redirect "/"
+end
+
 # Providing model information to the view
 # requires an instance variable (prefixing with the '@' symbol)
 
