@@ -61,6 +61,7 @@ get '/' do
     session[:reached_last] = false
   end
 
+
   @next_group_messages = next_group_messages(10,@messages)
   session[:num_items_on_current_page] = @next_group_messages.length
   @users = User.all
