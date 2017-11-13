@@ -9,12 +9,16 @@
     <nav>
       <!-- <a href="/login">login</a> -->
       <% if !session[:login] %>
-      <a class = "left" href="/">home</a>
+        <a class = "left" href="/">home</a>
 
-      <a class = "left" href="<%= current_user == nil ? '/login' : '/logout' %>">
-        <%= current_user == nil ? 'Login' : 'Logout' %>
-      </a>
-      <p class = "left"style="color: grey"> Current user: <%= current_user != nil ? @user.username : "" %></p>
+        <a class = "left" href="<%= current_user == nil ? '/login' : '/logout' %>">
+          <%= current_user == nil ? 'Login' : 'Logout' %>
+        </a>
+        <% if current_user != nil %>
+          <a class="left" href="/profile/show/<%= current_user.id %>">
+            View My Profile
+          </a>
+        <% end %>
       <% end %>
     </nav>
 
