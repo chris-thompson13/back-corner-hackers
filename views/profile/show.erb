@@ -5,7 +5,7 @@ end %>
 
 <h3>Current user: <%= current_user.nil? ? "" : current_user.username %></h3>
 
-<% if session[:edit_mode] %>
+<% if session[:edit_mode] && user.id == current_user.id %>
 <h1>profile for <%= user.nil? ? current_user.username : user.username %></h1>
 <form class="" action="/profile/edit/<%=params[:id]%>" method="post">
   <label for="first_name" style="color: grey">First name</label>
@@ -16,7 +16,10 @@ end %>
   <input type="hidden" name="_method" value="patch">
   <input type="submit" name="" value="Save">
 </form>
-<% else %>
+<% else
+session[:edit_mode]=false
+ %>
+
 <h1>profile for <%= user.username %></h1>
 <p>First name: <%= user.fname %></p>
 <p>Last name: <%= user.lname %></p>
