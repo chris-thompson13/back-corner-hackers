@@ -4,13 +4,19 @@
 
   <div class="inLine">
     <h1>Messages</h1>
-    <% @messages.reverse_each do |message| %>
+    <% get_10_messages.each do |message| %>
       <div class="messageTitle">
         <p>
           <a href="/profile/show/<%= message.user_id %>"><%= @users.find_by_id(message.user_id).username %></a>
         </p>
         <p><%= message.body %></p>
       </div>
+    <% end %>
+
+    <% if !session[:reached_last] %>
+    <form class="" action="/" method="post">
+      <input type="submit" name="" value="Next">
+    </form>
     <% end %>
   </div>
   <br>

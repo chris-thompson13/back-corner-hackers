@@ -20,12 +20,39 @@ def authenticate_user
   redirect '/login' if current_user.nil?
 end
 
+def get_10_messages
+  puts "Messages: "
+  puts session[:messages]
+  puts "From Num: "
+  puts session[:from_num]
+  puts "Last: "
+  puts session[:reached_last]
+
+  msges = []
+  if session[:messages].nil?
+    session[:messages] = Message.all.reverse
+    session[:from_num] = 0
+    session[:reached_last] =false
+  end
+  for i in 0..9
+    if session[:messages][session[:from_num]].nil?
+      session[:reached_last] = true
+      break
+    end
+
+    msges << session[:messages][session[:from_num]]
+    session[:from_num] += 1
+  end
+  msges
+end
+
 get '/login' do
   session[:login]=true
   erb :login
 end
 
 get '/logout' do
+  binding.pry
   session.clear
   redirect "/"
 end
@@ -34,9 +61,12 @@ end
 get '/' do
   session[:login]=false
   current_user
-  @messages = Message.all
   @users = User.all
   erb :index
+end
+
+post '/' do
+  redirect '/'
 end
 
 # login
@@ -91,6 +121,7 @@ end
 delete '/profile/delete' do
   current_user
   @user.destroy
+  binding.pry
   session.clear
   redirect "/"
 end
