@@ -62,13 +62,23 @@ get '/' do
     session[:reached_last] = false
   end
 
-  @next_group_messages = next_group_messages(5,@messages)
-
+  @next_group_messages = next_group_messages(10,@messages)
+  session[:num_items_on_current_page] = @next_group_messages.length
   @users = User.all
   erb :index
 end
 
 post '/next' do
+  redirect '/'
+end
+
+post '/prev' do
+  session[:from_num] -= session[:num_items_on_current_page]
+  session[:from_num] -= 10
+  if session[:from_num] < 0
+    session[:from_num] =0
+  end
+  session[:reached_last] = false
   redirect '/'
 end
 
