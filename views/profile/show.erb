@@ -5,8 +5,11 @@
 <%
  if current_user != nil && user.id == current_user.id
    %>
-<p style="color:grey">edit</p>
-<p style="color:grey">delete</p>
+<a href="/profile/edit" style="color:grey">edit</a>
+<form class="" action="/profile/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" name="" value="Delete">
+</form>
 <% end %>
 
 <div class="inLine">
