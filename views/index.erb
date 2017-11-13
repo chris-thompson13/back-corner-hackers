@@ -13,15 +13,17 @@
       </div>
     <% end %>
 
+
     <% if session[:from_num] > 0 %>
     <form class="" action="/prev" method="post">
-      <input type="submit" name="" value="Prev >>">
+      <input type="submit" name="" value="<< Prev">
     </form>
     <% end %>
 
     <% if !session[:reached_last] %>
     <form class="" action="/next" method="post">
       <input type="submit" name="" value="Next >>">
+
     </form>
     <% end %>
   </div>
@@ -31,7 +33,7 @@
   <div class="inLine2">
     <form class="messenger" action="/messages" method="post">
       <label>message</label><br>
-      <textarea name="body" rows="8" value=""></textarea><br>
+      <textarea name="body" rows="8" value="" maxlength="150"></textarea><br>
       <input type="submit" name="" value="send" id="sub"><br>
     </form>
   </div>
