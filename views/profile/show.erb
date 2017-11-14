@@ -1,53 +1,47 @@
 <div class="spacer"></div>
 
-
 <% user = User.find_by_id(params[:id]) %>
 <% if user.nil?
   redirect "/"
-end %>
-
-<h3>Current user: <%= current_user.nil? ? "" : current_user.username %></h3>
+  end %>
 
 <% if session[:edit_mode] && user.id == current_user.id %>
-<h1>profile for <%= user.nil? ? current_user.username : user.username %></h1>
-<form class="" action="/profile/edit/<%=params[:id]%>" method="post">
-  <label for="first_name" style="color: grey">First name</label>
-  <input type="text" name="first_name" value="<%=current_user.fname%>" style="color: grey">
-  <label for="last_name" style="color: grey">Last name</label>
-  <input type="text" name="last_name" value="<%=current_user.lname%>" style="color: grey">
+    <h1>profile for <%= user.nil? ? current_user.username : user.username %></h1>
+    <form id="profile-edit" action="/profile/edit/<%=params[:id]%>" method="post">
+      <label for="first_name" style="color: grey">First name</label>
+      <input type="text" name="first_name" value="<%=current_user.fname%>" style="color: grey">
+      <label for="last_name" style="color: grey">Last name</label>
+      <input type="text" name="last_name" value="<%=current_user.lname%>" style="color: grey">
 
-  <input type="hidden" name="_method" value="patch">
-  <input type="submit" name="" value="Save">
-</form>
-<% else
-session[:edit_mode]=false
- %>
-
-<h1>profile for <%= user.username %></h1>
-<p>First name: <%= user.fname %></p>
-<p>Last name: <%= user.lname %></p>
+      <input type="hidden" name="_method" value="patch">
+      <input type="submit" name="" value="Save">
+    </form>
+<% else session[:edit_mode]=false %>
+    <div id="profile-noedit">
+      <h1>profile for <%= user.username %></h1>
+      <p>First name: <%= user.fname %></p>
+      <p>Last name: <%= user.lname %></p>
+    </div>
 <% end %>
 
-<div class="nav_messages">
-<%
- if current_user != nil && user.id == current_user.id
-   %>
-<% if !session[:edit_mode] %>
-<form class="next_prev" action="/profile/edit/<%=params[:id]%>" method="post">
-  <input type="submit" name="" value="Edit" class="left next_prev">
-</form>
-<% end %>
+<div id="nav_messages">
+<% if current_user != nil && user.id == current_user.id %>
+    <% if !session[:edit_mode] %>
+      <form class="next_prev" action="/profile/edit/<%=params[:id]%>" method="post">
+        <input type="submit" name="" value="Edit" class="left next_prev">
+      </form>
+    <% end %>
 
-<form class="next_prev" action="/profile/delete" method="post">
-  <input type="hidden" name="_method" value="delete" class="left next_prev">
-  <input type="submit" name="" value="Delete" class="left next_prev">
-</form>
+      <form class="next_prev" action="/profile/delete" method="post">
+        <input type="hidden" name="_method" value="delete" class="left next_prev">
+        <input type="submit" name="" value="Unregister me" class="left next_prev">
+      </form>
 <% end %>
 
 </div>
 
 <div class="inLine">
-  <h3><%= user.username %></h3>
+  <h3><%= user.username %>'s messages:</h3>
   <% user.messages.reverse_each do |message| %>
     <div class="messageTitle">
       <p><%= message.body %></p>

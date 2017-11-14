@@ -41,6 +41,7 @@ nav {
   margin-top: 0px;
   padding: 20px;
   top: 0px;
+  z-index: 5;
 }
 
 form {
@@ -50,6 +51,24 @@ form {
 label {
   color: white;
   text-align: center;
+}
+
+input {
+  border-color: #33b8ff;
+  width: 90%;
+  border-radius: 5px;
+  border-style: solid;
+  text-align: center;
+}
+
+textarea {
+  width: 90%;
+  border-color: #33b8ff;
+  border-radius: 5px;
+  border-style: solid;
+  text-align: center;
+  color: #33b8ff;
+  font-size: 13px;
 }
 
 .left {
@@ -101,28 +120,9 @@ label {
   bottom: 50px;
 }
 
-input {
-  border-color: #33b8ff;
-  width: 90%;
-  border-radius: 5px;
-  border-style: solid;
+#nav_messages {
   text-align: center;
-}
-
-textarea {
-  width: 90%;
-  border-color: #33b8ff;
-  border-radius: 5px;
-  border-style: solid;
-  text-align: center;
-  color: #33b8ff;
-  font-size: 13px;
-}
-
-
-
-.nav_messages {
-  float: right;
+  margin-top: 5px;
 }
 
 .next_prev {
@@ -143,6 +143,22 @@ textarea {
 #login-form {
   margin: 20vh auto;
   width: 30vw;
+}
+
+#profile-edit {
+  width: 300px;
+  margin: 0 auto;
+}
+
+#profile-noedit {
+  border-color: #33b8ff;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 10px;
+  width: 300px;
+  margin: 5px auto;
+  text-align: center;
+  line-height: 2em;
 }
 
 .footer {
