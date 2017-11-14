@@ -8,16 +8,16 @@
   <body>
     <nav>
       <!-- <a href="/login">login</a> -->
+      <a class = "left" href="/">home</a>
       <% if !session[:login] %>
 
-        <a class = "left" href="/">home</a>
 
         <a class = "left" href="<%= current_user == nil ? '/login' : '/logout' %>">
-          <%= current_user == nil ? 'Login' : 'Logout' %>
+          <%= current_user == nil ? 'login' : 'logout' %>
         </a>
 
         <% if current_user != nil && !session[:in_profile_page] %>
-          <a class="left" href="/profile/show/<%= current_user.id %>">
+          <a class="right" href="/profile/show/<%= current_user.id %>">
             View My Profile
           </a>
         <% end %>
@@ -26,6 +26,12 @@
     </nav>
 
     <%= yield %>
+
+    <footer class="footer">
+      <div>
+        <p>&copy; Chris, George, and Sandro @ NYCDA 2017</p>
+        </div>
+    </footer>
 
     <script src="/js/index.js"></script>
   </body>

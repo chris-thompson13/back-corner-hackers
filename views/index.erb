@@ -1,9 +1,8 @@
 <div class="spacer"></div>
 
 <div class="full">
-
   <div class="inLine">
-    <h1>Messages</h1>
+    <h1>messages</h1>
     <% @next_group_messages.each do |message| %>
       <div class="messageTitle">
         <p>
@@ -23,18 +22,15 @@
       <% if !session[:reached_last] %>
       <form class="left next_prev" action="/next" method="post">
         <input type="submit" name="" value="Next >>">
-
       </form>
       <% end %>
     </div>
+
   </div>
-  <br>
-  <br>
-  <br>
-  <div class="inLine2">
+  <div id="add-message-box">
     <form class="messenger" action="/messages" method="post">
-      <label>message</label><br>
-      <textarea name="body" rows="8" value="" maxlength="150"></textarea><br>
+      <label>add new message:</label><br>
+      <textarea name="body" rows="3" value="" maxlength="150"></textarea><br>
       <input type="submit" name="" value="send" id="sub"><br>
     </form>
   </div>
