@@ -28,20 +28,23 @@ session[:edit_mode]=false
 <p>Last name: <%= user.lname %></p>
 <% end %>
 
+<div class="nav_messages">
 <%
  if current_user != nil && user.id == current_user.id
    %>
 <% if !session[:edit_mode] %>
-<form class="" action="/profile/edit/<%=params[:id]%>" method="post">
-  <input type="submit" name="" value="Edit">
+<form class="next_prev" action="/profile/edit/<%=params[:id]%>" method="post">
+  <input type="submit" name="" value="Edit" class="left next_prev">
 </form>
 <% end %>
 
-<form class="" action="/profile/delete" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <input type="submit" name="" value="Delete">
+<form class="next_prev" action="/profile/delete" method="post">
+  <input type="hidden" name="_method" value="delete" class="left next_prev">
+  <input type="submit" name="" value="Delete" class="left next_prev">
 </form>
 <% end %>
+
+</div>
 
 <div class="inLine">
   <h3><%= user.username %></h3>

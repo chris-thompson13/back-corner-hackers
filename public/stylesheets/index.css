@@ -136,6 +136,10 @@ textarea{
   text-align: center;
 }
 
+.nav_messages {
+  float: right;
+}
+
 .next_prev {
   width: 100px;
   display: inline-block;
