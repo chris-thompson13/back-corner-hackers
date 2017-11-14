@@ -39,6 +39,14 @@ def next_group_messages(num, messages)
   msgs
 end
 
+def load_messages
+  @messages = Message.all.reverse
+  @next_group_messages = next_group_messages(10,@messages)
+  session[:num_items_on_current_page] = @next_group_messages.length
+  @users = User.all
+  erb :index
+end
+
 get '/login' do
   session[:login]=true
   erb :login
@@ -52,24 +60,17 @@ end
 # Define routes below
 get '/' do
   session[:login]=false
+  session[:in_profile_page] = false
   current_user
 
-  @messages = Message.all.reverse
 
-  if session[:from_num].nil?
-    session[:from_num] = 0
-    session[:reached_last] = false
-  end
-
-
-  @next_group_messages = next_group_messages(10,@messages)
-  session[:num_items_on_current_page] = @next_group_messages.length
-  @users = User.all
-  erb :index
+  session[:from_num] = 0
+  session[:reached_last] = false
+  load_messages
 end
 
 post '/next' do
-  redirect '/'
+  load_messages
 end
 
 post '/prev' do
@@ -79,7 +80,7 @@ post '/prev' do
     session[:from_num] =0
   end
   session[:reached_last] = false
-  redirect '/'
+  load_messages
 end
 
 # login
@@ -120,18 +121,20 @@ get '/messages/:id' do
 end
 
 get '/profile/show/:id' do
+  session[:in_profile_page] = true
   erb :'profile/show'
 end
 
 patch '/profile/edit/:id' do
-    session[:edit_mode]=false
-    current_user.update(fname: params[:first_name],lname: params[:last_name])
-    redirect "/profile/show/#{params[:id]}"
+  session[:in_profile_page] = true
+  session[:edit_mode]=false
+  current_user.update(fname: params[:first_name],lname: params[:last_name])
+  redirect "/profile/show/#{params[:id]}"
 end
 
 post '/profile/edit/:id' do
-    session[:edit_mode]=true
-    redirect "/profile/show/#{params[:id]}"
+  session[:edit_mode]=true
+  redirect "/profile/show/#{params[:id]}"
 end
 
 delete '/profile/delete' do
