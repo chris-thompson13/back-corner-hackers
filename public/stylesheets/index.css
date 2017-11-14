@@ -112,6 +112,8 @@ textarea {
   display: inline-block;
   float: left;
   margin-top: 40px;
+  position: relative;
+  bottom: 40px;
 }
 
 .full {
